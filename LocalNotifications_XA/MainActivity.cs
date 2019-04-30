@@ -6,7 +6,8 @@ using Android.Widget;
 using Android.Support.V4.App;
 using TaskScheduler = Android.Support.V4.App.TaskStackBuilder;
 using Android.Content;
-using Java.Lang;
+using Java.Lang;  // This was not mentioned in the walkthrough. This was suggested by @jezh in XF Forum.
+//   Refer to the SF Forum thread: https://forums.xamarin.com/discussion/comment/373015#Comment_373015
 
 // Base on the code in this document:
 //    https://docs.microsoft.com/en-us/xamarin/android/app-fundamentals/notifications/local-notifications-walkthrough
