@@ -59,13 +59,10 @@ namespace LocalNotifications_XA
             var resultPendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
 
             // Build the notification:
-            Calendar calendar = Calendar.GetInstance(Locale.English);
-            calendar.Set(2019, 4, 29, 23, 05);
             var builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                           .SetAutoCancel(true)                                            // Dismiss the notification from the notification area when the user clicks on it
                           .SetContentIntent(resultPendingIntent)                          // Start up this activity when the user clicks the intent.
                           .SetContentTitle("Button Clicked")                              // Set the title
-                          .SetWhen(calendar.TimeInMillis)
                           .SetNumber(count)                                               // Display the count in the Content Info
                           .SetSmallIcon(Resource.Drawable.ic_stat_button_click)           // This is the icon to display
                           .SetContentText($"The button has been clicked {count} times."); // the message to display.
