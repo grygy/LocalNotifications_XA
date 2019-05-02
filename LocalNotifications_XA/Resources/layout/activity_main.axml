@@ -12,4 +12,10 @@
         android:minHeight="25px"
         android:id="@+id/MyButton"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:text="Remind After 15 Seconds"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/MyButton"
+        android:id="@+id/RemindButton" />
 </RelativeLayout>

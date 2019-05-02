@@ -17,11 +17,11 @@ namespace LocalNotifications_XA
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        static readonly int NOTIFICATION_ID = 1000;
-        static readonly string CHANNEL_ID = "location_notification";
+        internal static readonly int NOTIFICATION_ID = 1000;
+        internal static readonly string CHANNEL_ID = "local_notification";
         internal static readonly string COUNT_KEY = "count";
 
-        int count = 0;
+        public static int count = 0;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,6 +35,24 @@ namespace LocalNotifications_XA
             // Display the "Hello World, Click Me!" button and register its event handler:
             var button = FindViewById<Button>(Resource.Id.MyButton);
             button.Click += ButtonOnClick;
+
+            var remind = FindViewById<Button>(Resource.Id.RemindButton);
+            remind.Click += Remind_Click;
+        }
+
+        private void Remind_Click(object sender, System.EventArgs e)
+        {
+            string title = "Scheduled Reminder";
+            string message = $"The button has been clicked {count} times.";
+
+            Intent alarmIntent = new Intent(Application.Context, typeof(AlarmReceiver));
+            alarmIntent.PutExtra("message", message);
+            alarmIntent.PutExtra("title", title);
+
+            var pendingIntent = PendingIntent.GetBroadcast(this, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
+            var alarmManager = GetSystemService(AlarmService).JavaCast<AlarmManager>();
+
+            alarmManager.Set(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime() + 15 * 1000, pendingIntent);
         }
 
         private void ButtonOnClick(object sender, System.EventArgs e)
